@@ -1,23 +1,23 @@
 import { useState } from 'react';
-import get_api from '../api/shows';
+import { getActors, getShows } from '../api/shows';
+import SerachForm from '../components/SearchForm';
+import ShowGrid from '../components/Shows/ShowGrid';
+import ActorGrid from '../components/Actors/ActorGrid';
 
 const Home = () => {
-  const [searchStr, setSearchStr] = useState('');
-  const [movies, setMovies] = useState(null);
+  const [apiData, setApiData] = useState(null);
   const [showsError, setShowError] = useState(null);
 
-  //console.log(movies);
-  function inpValChange(ev) {
-    setSearchStr(ev.target.value);
-  }
-  async function search(ev) {
-    ev.preventDefault();
-
+  async function search(searchOption, searchStr) {
     try {
       setShowError(null);
-      const body = await get_api(`${searchStr}`);
-
-      setMovies(body);
+      if (searchOption === 'shows') {
+        const body = await getShows(`shows?q=${searchStr}`);
+        setApiData(body);
+      } else {
+        const body = await getActors(`people?q=${searchStr}`);
+        setApiData(body);
+      }
     } catch (error) {
       setShowError(error.message);
     }
@@ -26,21 +26,22 @@ const Home = () => {
     if (showsError) {
       return <div>Error Eccured : ${showsError.message}</div>;
     }
-    if (movies) {
-      return movies.map(movie => {
-        return <div key={movie.show.id}>{movie.show.name}</div>;
-      });
+    if (apiData) {
+      if (apiData.length > 0) {
+        return apiData[0].show ? (
+          <ShowGrid shows={apiData} />
+        ) : (
+          <ActorGrid actors={apiData} />
+        );
+      }
+      return <div>No Result Found</div>;
     }
     return null;
   }
 
   return (
     <div>
-      <h2>Home page</h2>
-      <form onSubmit={search}>
-        <input type="text" value={searchStr} onChange={inpValChange} />{' '}
-        <button type="submit">ٍSearch</button>
-      </form>
+      <SerachForm search={search} />
       {renderMovies()}
     </div>
   );
