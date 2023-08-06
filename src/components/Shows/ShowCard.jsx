@@ -9,7 +9,7 @@ const ShowCard = ({ name, id, img, summary }) => {
       <img src={img} />
       <h1>{name}</h1>
       <div> {summaryStr}</div>
-      <Link to="/">Read More</Link>
+      <Link to={`show/${id}`}>Read More</Link>
     </div>
   );
 };
