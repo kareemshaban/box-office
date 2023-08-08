@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getShowById } from '../../api/shows';
 import { useQuery } from 'react-query';
 import ShowMainData from './ShowMainData';
@@ -17,9 +17,9 @@ const Show = () => {
     return <div>Sorry something went wrong {showError}</div>;
   }
   if (showData) {
-    console.log(showData);
     return (
       <div>
+        <Link to="/"> Go back to home</Link>
         <ShowMainData
           img={showData.image}
           name={showData.name}

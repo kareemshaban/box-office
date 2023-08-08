@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useReducer, useState } from 'react';
 import { getActors, getShows } from '../api/shows';
 import SerachForm from '../components/SearchForm';
 import ShowGrid from '../components/Shows/ShowGrid';
