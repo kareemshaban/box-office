@@ -13,11 +13,7 @@ const ActorGrid = ({ actors }) => {
             birthday={data.person.birthday}
             deathday={data.person.deathday}
             country={data.person.country ? data.person.country.name : ''}
-            img={
-              data.person.image
-                ? data.person.image.medium
-                : 'https://placehold.co/600x400'
-            }
+            img={data.person.image ? data.person.image.medium : '/actor.png'}
           />
         );
       })}
