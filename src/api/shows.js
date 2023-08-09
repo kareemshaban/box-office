@@ -22,5 +22,6 @@ export async function getShowsByIds(showIds) {
   });
 
   const arr = await Promise.all(promises);
+  console.log(arr);
   return arr;
 }

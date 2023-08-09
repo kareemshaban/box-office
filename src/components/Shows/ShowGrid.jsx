@@ -1,6 +1,7 @@
 import { useEffect, useReducer } from 'react';
 import ShowCard from './ShowCard';
 import { usePresistedReducer } from '../../lib/usePresistedReducerShow';
+import { FlexGrid } from '../../common/FlexGrid';
 
 const ShowGrid = ({ shows }) => {
   const [starred, starDispatch] = usePresistedReducer();
@@ -21,7 +22,7 @@ const ShowGrid = ({ shows }) => {
     }
   };
   return (
-    <div>
+    <FlexGrid>
       {shows.map(data => {
         return (
           <ShowCard
@@ -39,7 +40,7 @@ const ShowGrid = ({ shows }) => {
           />
         );
       })}
-    </div>
+    </FlexGrid>
   );
 };
 export default ShowGrid;

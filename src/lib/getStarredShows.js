@@ -1,7 +1,6 @@
 import { useQuery } from 'react-query';
 import { usePresistedReducer } from './usePresistedReducerShow';
 import { getShowsByIds } from '../api/shows';
-import { json } from 'react-router-dom';
 
 export const useGetStarredShows = () => {
   const [starred] = usePresistedReducer();
@@ -11,6 +10,8 @@ export const useGetStarredShows = () => {
       return getShowsByIds(starred);
     },
   });
+
+  console.log(result.data);
 
   return result.data;
 };
