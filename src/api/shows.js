@@ -15,3 +15,12 @@ export function getActors(queryStr) {
 export function getShowById(queryStr) {
   return get_api(`shows/${queryStr}?embed[]=seasons&embed[]=cast`);
 }
+
+export async function getShowsByIds(showIds) {
+  const promises = showIds.map(showId => {
+    return getShowById(showId);
+  });
+
+  const arr = await Promise.all(promises);
+  return arr;
+}

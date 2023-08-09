@@ -1,7 +1,14 @@
+import ShowGrid from '../components/Shows/ShowGrid';
+import { useGetStarredShows } from '../lib/getStarredShows';
+
 const Started = () => {
+  const result = useGetStarredShows().map(item => {
+    return { show: item };
+  });
+
   return (
     <div className="contact">
-      <h2>Contact page</h2>
+      <ShowGrid shows={result} />
     </div>
   );
 };
